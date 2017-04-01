@@ -29,6 +29,8 @@ $MESS['COINFIDE_NO'] = "Нет";
 
 $MESS["COINFIDE_LANGUAGE"] = "Язык страницы платежной системы";
 $MESS["COINFIDE_DESC_LANGUAGE"] = "Например : ru";
+$MESS["IS_TEST"] = "Тестовый режим";
+$MESS["IS_TEST_DESCR"] = "Если пустое значение - магазин будет работать в обычном режиме";
 
 
 $MESS['COINFIDE_BILL_FNAME'] = "Ваше имя:";

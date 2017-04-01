@@ -17,7 +17,12 @@ $psDescription = GetMessage('COINFIDE_PSDESCR', array('COINFIDE_IPN_LINK' => $IP
 
 
 $arPSCorrespondence = array(
-
+    "IS_TEST" => array(
+        "NAME" => GetMessage("IS_TEST"),
+        "DESCR" => GetMessage("IS_TEST_DESCR"),
+        "VALUE" => "Y",
+        "TYPE" => ""
+    ),
     "API_KEY" => array(
         "NAME"  => GetMessage("COINFIDE_API_KEY"),
         "DESCR" => GetMessage("COINFIDE_API_KEY"),

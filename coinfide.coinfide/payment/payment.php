@@ -88,7 +88,12 @@ if (class_exists($class)){
     throw new \Exception('Error: load Coinfide\Client!');
 }
 
-$client->setMode("prod");
+if(strlen(CSalePaySystemAction::GetParamValue("IS_TEST")) > 0){
+    $client->setMode("demo");
+}else{
+    $client->setMode("prod");
+}
+
 $client->setCredentials(CSalePaySystemAction::GetParamValue("API_USERNAME"),CSalePaySystemAction::GetParamValue("API_PASS"));
 
 $corder = new \Coinfide\Entity\Order();
