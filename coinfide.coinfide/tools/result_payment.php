@@ -5,6 +5,8 @@ IncludeModuleLangFile(__FILE__);
 
 use \Bitrix\Main\Loader;
 
+CModule::IncludeModule("sale");
+
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) { die(); }
 
 try {
@@ -25,8 +27,12 @@ try {
     if (!$order) {
         throw new Exception('Invalid Order ID '. $_POST['externalOrderId']);
     }
+    CSalePaySystemAction::InitParamArrays($order, $order["ID"]);
 
-    if ($order['PAYED'] == 'Y') { die(); }
+    if ($order['PAYED'] == 'Y') {
+        $message = ' '.GetMessage("COINFIDE_PAYMENT_VAS_PLATEJ_USPESNO_V");
+        throw new Exception('');
+    }
 
     $checksum = $_POST['checksum'];
 
@@ -34,7 +40,9 @@ try {
 
     if (md5(http_build_query($_POST) . CSalePaySystemAction::GetParamValue('API_KEY')) != $checksum) {
 //            echo 'Callback valid! You may process the order. Order data: ';
-        throw new Exception('SUCCESS URL Params invalid! You may not process the order. Order data: ' . serialize($this->request->post));
+//        throw new Exception('SUCCESS URL Params invalid! You may not process the order. Order data: ' . serialize($_POST));
+        throw new Exception('SUCCESS URL Params invalid! You may not process the order!');
+
     }
 
     if (isset($_POST['transactionUid'])) {

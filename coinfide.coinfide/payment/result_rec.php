@@ -21,8 +21,10 @@ try {
     if (!$order) {
         throw new Exception('Invalid Order ID '. $_POST['externalOrderId']);
     }
+    CSalePaySystemAction::InitParamArrays($order, $order["ID"]);
 
-    if ($order['PAYED'] == 'Y') { die(); }
+
+    if ($order['PAYED'] == 'Y') { echo 'OK'; die(); }
 
 //    $checksum = $_POST['checksum'];
 

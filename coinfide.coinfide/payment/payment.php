@@ -4,7 +4,7 @@
 
 include(GetLangFileName(dirname(__FILE__) . "/", "/.description.php"));
 if(!CModule::IncludeModule("coinfide.coinfide")) return;
-
+if(!CModule::IncludeModule("currency")) return;
 
 if (isset($arResult['ORDER_ID'] )) {
 	$ORDER_ID = $arResult['ORDER_ID'];
@@ -155,7 +155,6 @@ foreach ($arBasketItems as $val)
 //        $useVat = 'GROSS';
 //        $vatRate = '19';
 //    }
-
 //    $forSend['ORDER_VAT'][]   = $vatRate;
 //    $forSend['ORDER_PRICE_TYPE'][] = $useVat;
     $citem = new \Coinfide\Entity\OrderItem();
@@ -163,7 +162,9 @@ foreach ($arBasketItems as $val)
     $citem->setType('I');
     $citem->setQuantity($val['QUANTITY']);
 
-    $citem->setPriceUnit(number_format($val['PRICE'], 2, '.', ''));
+//    $citem->setPriceUnit(number_format($val['PRICE'], 2, '.', ''));
+//    CCurrencyRates::ConvertCurrency
+    $citem->setPriceUnit(number_format(CCurrencyRates::ConvertCurrency($val['PRICE'], $GLOBALS['SALE_INPUT_PARAMS']['ORDER']['CURRENCY'], $currency)),2,'.','');
     $corder->addOrderItem($citem);
 }
 
@@ -171,7 +172,9 @@ $citem = new \Coinfide\Entity\OrderItem();
 $citem->setName('Shipping');
 $citem->setType('S');
 $citem->setQuantity(1);
-$citem->setPriceUnit(number_format($arOrder['PRICE_DELIVERY'], 2, '.', ''));
+//$citem->setPriceUnit(number_format($arOrder['PRICE_DELIVERY'], 2, '.', ''));
+$citem->setPriceUnit(number_format(CCurrencyRates::ConvertCurrency($val['PRICE_DELIVERY'], $GLOBALS['SALE_INPUT_PARAMS']['ORDER']['CURRENCY'], $currency)),2,'.'.'');
+
 $corder->addOrderItem($citem);
 
 
@@ -183,7 +186,7 @@ $response_data = $client->submitOrder($corder);
 ?>
 
 <?//=GetMessage('COINFIDE_DESCRIPTION_PS')?><!-- <b>www.coinfide.com</b>.<br /><br />-->
-<?//=GetMessage('COINFIDE_DESCRIPTION_SUM')?><!--: <b>--><?//=CurrencyFormat($amount, $currency).' '.$currency ?><!--</b><br /><br />-->
+<?=GetMessage('COINFIDE_DESCRIPTION_SUM')?>: <b><?=CurrencyFormat($amount, $GLOBALS['SALE_INPUT_PARAMS']['ORDER']['CURRENCY'])?></b><br /><br />
 <!--<form method="POST" action="--><?//=$response_data->getRedirectUrl()?><!--" accept-charset="utf-8">-->
 <!--    <input type="submit" value="--><?//=GetMessage("COINFIDE_PAY")?><!--"/>-->
 <!--</form>-->
