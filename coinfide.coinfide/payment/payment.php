@@ -5,7 +5,7 @@
 include(GetLangFileName(dirname(__FILE__) . "/", "/.description.php"));
 if(!CModule::IncludeModule("coinfide.coinfide")) return;
 if(!CModule::IncludeModule("currency")) return;
-\Bitrix\Main\Loader::IncludeModule("sale");
+if(!CModule::IncludeModule("sale")) return;
 
 //if (isset($arResult['ORDER_ID'] )) {
 //	$ORDER_ID = $arResult['ORDER_ID'];
@@ -82,6 +82,10 @@ $userData = $USER->GetByID($USER->GetID())->Fetch();
 if(!empty($arCurOrderProps['PHONE']))
 	$user_phone = $arCurOrderProps['PHONE'];
 
+$user_name = !empty($USER->GetFirstName())?$USER->GetFirstName():$arCurOrderProps['FIO'];
+$user_surname = !empty($USER->GetLastName())?$USER->GetLastName():$arCurOrderProps['FIO'];
+$user_email = !empty($USER->GetEmail())?$USER->GetEmail():$arCurOrderProps['EMAIL'];
+
 $class = 'Coinfide\\Client';
 //        $client = new Coinfide\Client(array('trace'=>true));
 if (class_exists($class)){
@@ -108,9 +112,9 @@ $corder = new \Coinfide\Entity\Order();
 
                 //buyer
                 $buyer = new \Coinfide\Entity\Account();
-                $buyer->setEmail($USER->GetEmail());
-                $buyer->setName($USER->GetFirstName());
-                $buyer->setSurname($USER->GetLastName());
+                $buyer->setEmail($user_email);
+                $buyer->setName(utf8_encode($user_name));
+                $buyer->setSurname(utf8_encode($user_surname));
                 $buyer->setLanguage(CSalePaySystemAction::GetParamValue("LANGUAGE"));
                 $buyer->setBirthDate('19750101000000');
                 $phone = new \Coinfide\Entity\Phone();
@@ -118,10 +122,10 @@ $corder = new \Coinfide\Entity\Order();
                 $buyer->setPhone($phone);
         $baddress = new \Coinfide\Entity\Address();
         //todo adress!!!
-        $baddress->setCity($GLOBALS['SALE_INPUT_PARAMS']['PROPERTY']['LOCATION_CITY']);
-        $baddress->setFirstAddressLine($GLOBALS['SALE_INPUT_PARAMS']['PROPERTY']['LOCATION']);
+        $baddress->setCity(utf8_encode($GLOBALS['SALE_INPUT_PARAMS']['PROPERTY']['LOCATION_CITY']));
+        $baddress->setFirstAddressLine(utf8_encode($GLOBALS['SALE_INPUT_PARAMS']['PROPERTY']['ADDRESS']));
 //        $baddress->setPostalCode($userData['PERSONAL_ZIP']);
-        $baddress->setPostalCode($GLOBALS['SALE_INPUT_PARAMS']['PROPERTY']['ZIP']);
+        $baddress->setPostalCode(utf8_encode($GLOBALS['SALE_INPUT_PARAMS']['PROPERTY']['ZIP']));
 
         $baddress->setCountryCode("RU");
         $buyer->setAddress($baddress);
@@ -159,7 +163,7 @@ foreach ($arBasketItems as $val)
 //    $forSend['ORDER_VAT'][]   = $vatRate;
 //    $forSend['ORDER_PRICE_TYPE'][] = $useVat;
     $citem = new \Coinfide\Entity\OrderItem();
-    $citem->setName($val['NAME'] ?: 'unknown');
+    $citem->setName(utf8_encode($val['NAME']) ?: 'unknown');
     $citem->setType('I');
     $citem->setQuantity($val['QUANTITY']);
 
@@ -181,7 +185,7 @@ $corder->addOrderItem($citem);
 
 
 $corder->validate();
-//echo json_encode((array)$corder);
+//print_r($corder->toArray());
 $response_data = $client->submitOrder($corder);
 
 ?>
