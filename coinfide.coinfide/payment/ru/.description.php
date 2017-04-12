@@ -1,48 +1,48 @@
 <?if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 global $MESS;
 $MESS['COINFIDE_PSTITLE'] = 'CoinFide Payment';
-$MESS['COINFIDE_PSDESCR'] = 'РџСЂРёС‘Рј РїР»Р°С‚РµР¶РµР№ СЃ РїРѕРјРѕС‰СЊСЋ Coinfide <a href="https://www.coinfide.com/" target="_blank">https://www.coinfide.com/</a> <br>
-Р”Р»СЏ С„СѓРЅРєС†РёРѕРЅРёСЂРѕРІР°РЅРёСЏ IPN (РјРіРЅРѕРІРµРЅРЅРѕРµ СѓРІРµРґРѕРјР»РµРЅРёРµ РѕР± РѕРїР»Р°С‚Рµ) РІ Р»РёС‡РЅРѕРј РєР°Р±РёРЅРµС‚Рµ Coinfide РІ РЅР°СЃС‚СЂРѕР№РєР°С… Р’Р°С€РµРіРѕ Р°РєРєР°СѓРЅС‚Р° СѓРєР°Р¶РёС‚Рµ<br>
+$MESS['COINFIDE_PSDESCR'] = 'Приём платежей с помощью Coinfide <a href="https://www.coinfide.com/" target="_blank">https://www.coinfide.com/</a> <br>
+Для функционирования IPN (мгновенное уведомление об оплате) в личном кабинете Coinfide в настройках Вашего аккаунта укажите<br>
 <b>COINFIDE_IPN_LINK</b><br>';
-$MESS["COINFIDE_MERCHANT"] = "РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РјРµСЂС‡Р°РЅС‚Р° (Login-name)";
+$MESS["COINFIDE_MERCHANT"] = "Идентификатор мерчанта (Login-name)";
 $MESS["COINFIDE_API_USERNAME"] = "API username";
 $MESS["COINFIDE_API_PASS"] = "API password";
 $MESS["COINFIDE_API_KEY"] = "API secret key";
 
-$MESS["COINFIDE_IPN_LINK"] = "РЎcС‹Р»РєР° РґР»СЏ IPN РїСЂРѕС‚РѕРєРѕР»Р°";
-$MESS["COINFIDE_IPN_LINK_DESC"] = "<b>РџРѕР»Рµ С‚РѕР»СЊРєРѕ РґР»СЏ С‡С‚РµРЅРёСЏ. РџРѕР»РЅС‹Р№ РїСѓС‚СЊ РґРѕ СЃРєСЂРёРїС‚Р° IPN.</b> РќРµРѕР±С…РѕРґРёРјРѕ СѓРєР°Р·Р°С‚СЊ СЌС‚Сѓ СЃСЃС‹Р»РєСѓ РІ Р›РёС‡РЅРѕРј РєР°Р±РёРЅРµС‚Рµ РјРµСЂС‡Р°РЅС‚Р°.\";";
+$MESS["COINFIDE_IPN_LINK"] = "Сcылка для IPN протокола";
+$MESS["COINFIDE_IPN_LINK_DESC"] = "<b>Поле только для чтения. Полный путь до скрипта IPN.</b> Необходимо указать эту ссылку в Личном кабинете мерчанта.\";";
 
-$MESS["COINFIDE_SUCCESS_URL"] = "РЎСЃС‹Р»РєР° РІРѕР·РІСЂР°С‚Р° РєР»РёРµРЅС‚Р° РїРѕСЃР»Рµ СѓСЃРїРµС€РЅРѕРіРѕ РїР»Р°С‚РµР¶Р°";
-$MESS["COINFIDE_DESC_SUCCESS_URL"] = "<b>РџРѕР»Рµ С‚РѕР»СЊРєРѕ РґР»СЏ С‡С‚РµРЅРёСЏ.</b>РЎСЃС‹Р»РєР°, РЅР° РєРѕС‚РѕСЂСѓСЋ РІРµСЂРЅРµС‚СЃСЏ РєР»РёРµРЅС‚ РїРѕСЃР»Рµ Р·Р°РІРµСЂС€РµРЅРёСЏ РїР»Р°С‚РµР¶Р°.";
+$MESS["COINFIDE_SUCCESS_URL"] = "Ссылка возврата клиента после успешного платежа";
+$MESS["COINFIDE_DESC_SUCCESS_URL"] = "<b>Поле только для чтения.</b>Ссылка, на которую вернется клиент после завершения платежа.";
 
-$MESS["COINFIDE_FAIL_URL"] = "РЎСЃС‹Р»РєР° РІРѕР·РІСЂР°С‚Р° РєР»РёРµРЅС‚Р° РїСЂРё РѕС‚РјРµРЅРµ РїР»Р°С‚РµР¶Р°";
-$MESS["COINFIDE_DESC_FAIL_URL"] = "<b>РџРѕР»Рµ С‚РѕР»СЊРєРѕ РґР»СЏ С‡С‚РµРЅРёСЏ.</b>РЎСЃС‹Р»РєР°, РЅР° РєРѕС‚РѕСЂСѓСЋ РІРµСЂРЅРµС‚СЃСЏ РєР»РёРµРЅС‚ РїРѕСЃР»Рµ РЅРµ СѓРґР°С‡РЅРѕРіРѕ РїР»Р°С‚РµР¶Р° РёР»Рё РѕС‚РјРµРЅС‹ РїР»Р°С‚РµР¶Р°.";
+$MESS["COINFIDE_FAIL_URL"] = "Ссылка возврата клиента при отмене платежа";
+$MESS["COINFIDE_DESC_FAIL_URL"] = "<b>Поле только для чтения.</b>Ссылка, на которую вернется клиент после не удачного платежа или отмены платежа.";
 
-$MESS["COINFIDE_PRICE_CURRENCY"] = "Р’Р°Р»СЋС‚Р° РїР»Р°С‚РµР¶Р°";
-$MESS["COINFIDE_DESC_PRICE_CURRENCY"] = "<b style='color=#aeaeae;'>Р’РЅРёРјР°РЅРёРµ!</b> Р­С‚Рѕ Р·РЅР°С‡РµРЅРёРµ РґРѕР»Р¶РЅРѕ СЃРѕРѕС‚РІРµС‚СЃС‚РІРѕРІР°С‚СЊ РІР°Р»СЋС‚Рµ РІР°С€РµРіРѕ РјРµСЂС‡Р°РЅС‚Р°: (TS1 РґР»СЏ С‚РµСЃС‚РѕРІРѕРіРѕ РјРµСЂС‡Р°РЅС‚Р°)";
-$MESS["SHOULD_PAY"] = "РЎСѓРјРјР° Р·Р°РєР°Р·Р°";
-$MESS["SHOULD_PAY_DESCR"] = "РЎСѓРјРјР° Рє РѕРїР»Р°С‚Рµ";
-$MESS["COINFIDE_DEBUG_MODE"] = "Р’РєР»СЋС‡РёС‚СЊ СЂРµР¶РёРј РѕС‚Р»Р°РґРєРё";
-$MESS["COINFIDE_DESC_DEBUG_MODE"] = "(1 - РѕС‚Р»Р°РґРєР° РІРєР»СЋС‡РµРЅР°, 0 - РѕС‚Р»Р°РґРєР° РІС‹РєР»СЋС‡РµРЅР°)";
-$MESS['COINFIDE_YES'] = "Р”Р°";
-$MESS['COINFIDE_NO'] = "РќРµС‚";
+$MESS["COINFIDE_PRICE_CURRENCY"] = "Валюта платежа";
+$MESS["COINFIDE_DESC_PRICE_CURRENCY"] = "<b style='color=#aeaeae;'>Внимание!</b> Это значение должно соответствовать валюте вашего мерчанта: (TS1 для тестового мерчанта)";
+$MESS["SHOULD_PAY"] = "Сумма заказа";
+$MESS["SHOULD_PAY_DESCR"] = "Сумма к оплате";
+$MESS["COINFIDE_DEBUG_MODE"] = "Включить режим отладки";
+$MESS["COINFIDE_DESC_DEBUG_MODE"] = "(1 - отладка включена, 0 - отладка выключена)";
+$MESS['COINFIDE_YES'] = "Да";
+$MESS['COINFIDE_NO'] = "Нет";
 
-$MESS["COINFIDE_LANGUAGE"] = "РЇР·С‹Рє СЃС‚СЂР°РЅРёС†С‹ РїР»Р°С‚РµР¶РЅРѕР№ СЃРёСЃС‚РµРјС‹";
-$MESS["COINFIDE_DESC_LANGUAGE"] = "РќР°РїСЂРёРјРµСЂ : ru";
-$MESS["IS_TEST"] = "РўРµСЃС‚РѕРІС‹Р№ СЂРµР¶РёРј";
-$MESS["IS_TEST_DESCR"] = "Р•СЃР»Рё РїСѓСЃС‚РѕРµ Р·РЅР°С‡РµРЅРёРµ - РјР°РіР°Р·РёРЅ Р±СѓРґРµС‚ СЂР°Р±РѕС‚Р°С‚СЊ РІ РѕР±С‹С‡РЅРѕРј СЂРµР¶РёРјРµ";
-
-
-$MESS['COINFIDE_BILL_FNAME'] = "Р’Р°С€Рµ РёРјСЏ:";
-$MESS['COINFIDE_BILL_LNAME'] = "Р’Р°С€Р° С„Р°РјРёР»РёСЏ:";
-$MESS['COINFIDE_BILL_EMAIL'] = "Р’Р°С€ E-mail:";
-$MESS['COINFIDE_BILL_PHONE'] = "Р’Р°С€ РўРµР»РµС„РѕРЅ:";
-$MESS['COINFIDE_BILL_COUNTRYCODE'] = '<span style="display:inline-block;max-width: 100px;vertical-align: middle;">РљРѕРґ СЃС‚СЂР°РЅС‹ РІ РјРµР¶РґСѓРЅР°СЂРѕРґРЅРѕРј С„РѕСЂРјР°С‚Рµ(RU,UK,KZ):</span>';
+$MESS["COINFIDE_LANGUAGE"] = "Язык страницы платежной системы";
+$MESS["COINFIDE_DESC_LANGUAGE"] = "Например : ru";
+$MESS["IS_TEST"] = "Тестовый режим";
+$MESS["IS_TEST_DESCR"] = "Если пустое значение - магазин будет работать в обычном режиме";
 
 
-$MESS['COINFIDE_DESCRIPTION_PS'] = 'Р’С‹ С…РѕС‚РёС‚Рµ РѕРїР»Р°С‚РёС‚СЊ С‡РµСЂРµР· СЃРёСЃС‚РµРјСѓ';
-$MESS['COINFIDE_DESCRIPTION_SUM'] = 'РЎСѓРјРјР° Рє РѕРїР»Р°С‚Рµ РїРѕ СЃС‡РµС‚Сѓ';
-$MESS["COINFIDE_PAY"] = "РћРїР»Р°С‚РёС‚СЊ";
-$MESS['COINFIDE_ORDER_PAYED'] = 'Р—Р°РєР°Р· СѓР¶Рµ РѕРїР»Р°С‡РµРЅ';
+$MESS['COINFIDE_BILL_FNAME'] = "Ваше имя:";
+$MESS['COINFIDE_BILL_LNAME'] = "Ваша фамилия:";
+$MESS['COINFIDE_BILL_EMAIL'] = "Ваш E-mail:";
+$MESS['COINFIDE_BILL_PHONE'] = "Ваш Телефон:";
+$MESS['COINFIDE_BILL_COUNTRYCODE'] = '<span style="display:inline-block;max-width: 100px;vertical-align: middle;">Код страны в международном формате(RU,UK,KZ):</span>';
+
+
+$MESS['COINFIDE_DESCRIPTION_PS'] = 'Вы хотите оплатить через систему';
+$MESS['COINFIDE_DESCRIPTION_SUM'] = 'Сумма к оплате по счету';
+$MESS["COINFIDE_PAY"] = "Оплатить";
+$MESS['COINFIDE_ORDER_PAYED'] = 'Заказ уже оплачен';
 
 ?>

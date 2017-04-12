@@ -5,14 +5,15 @@
 include(GetLangFileName(dirname(__FILE__) . "/", "/.description.php"));
 if(!CModule::IncludeModule("coinfide.coinfide")) return;
 if(!CModule::IncludeModule("currency")) return;
+\Bitrix\Main\Loader::IncludeModule("sale");
 
-if (isset($arResult['ORDER_ID'] )) {
-	$ORDER_ID = $arResult['ORDER_ID'];
-} else if ( isset( $arResult['ID'] ) ) {
-    $ORDER_ID = $arResult['ID'];
-} else {
-    $ORDER_ID = (int) $_GET['ORDER_ID'];
-}
+//if (isset($arResult['ORDER_ID'] )) {
+//	$ORDER_ID = $arResult['ORDER_ID'];
+//} else if ( isset( $arResult['ID'] ) ) {
+//    $ORDER_ID = $arResult['ID'];
+//} else {
+//    $ORDER_ID = (int) $_GET['ORDER_ID'];
+//}
 
 #------------------------------------------------
 # Recive all items data
@@ -21,12 +22,15 @@ $amount = (strlen(CSalePaySystemAction::GetParamValue('AMOUNT')) > 0)
     ? CSalePaySystemAction::GetParamValue('AMOUNT')
     : $GLOBALS['SALE_INPUT_PARAMS']['ORDER']['SHOULD_PAY'];
 
+$global_currency = $GLOBALS['SALE_INPUT_PARAMS']['ORDER']['CURRENCY'];
+
 $currency = (strlen(CSalePaySystemAction::GetParamValue('PRICE_CURRENCY')) > 0)
     ? CSalePaySystemAction::GetParamValue('PRICE_CURRENCY')
-    : $GLOBALS['SALE_INPUT_PARAMS']['ORDER']['CURRENCY'];
+    : $global_currency;
 
 
-//echo json_encode($GLOBALS['SALE_INPUT_PARAMS']['PROPERTY']);
+$price_delivery = $GLOBALS['SALE_INPUT_PARAMS']['ORDER']['PRICE_DELIVERY'];
+$ORDER_ID = $GLOBALS['SALE_INPUT_PARAMS']['ORDER']['ID'];
 
 $arBasketItems = array();
 
@@ -114,13 +118,10 @@ $corder = new \Coinfide\Entity\Order();
                 $buyer->setPhone($phone);
         $baddress = new \Coinfide\Entity\Address();
         //todo adress!!!
-        $baddress->setCity('MOSCOW');
-
-//        $baddress->setCity($GLOBALS['SALE_INPUT_PARAMS']['PROPERTY']['LOCATION_CITY']);
-        $baddress->setFirstAddressLine("Test Street 1");
-//        $baddress->setFirstAddressLine($GLOBALS['SALE_INPUT_PARAMS']['PROPERTY']['LOCATION']);
+        $baddress->setCity($GLOBALS['SALE_INPUT_PARAMS']['PROPERTY']['LOCATION_CITY']);
+        $baddress->setFirstAddressLine($GLOBALS['SALE_INPUT_PARAMS']['PROPERTY']['LOCATION']);
 //        $baddress->setPostalCode($userData['PERSONAL_ZIP']);
-$baddress->setPostalCode($GLOBALS['SALE_INPUT_PARAMS']['PROPERTY']['ZIP']);
+        $baddress->setPostalCode($GLOBALS['SALE_INPUT_PARAMS']['PROPERTY']['ZIP']);
 
         $baddress->setCountryCode("RU");
         $buyer->setAddress($baddress);
@@ -164,7 +165,7 @@ foreach ($arBasketItems as $val)
 
 //    $citem->setPriceUnit(number_format($val['PRICE'], 2, '.', ''));
 //    CCurrencyRates::ConvertCurrency
-    $citem->setPriceUnit(number_format(CCurrencyRates::ConvertCurrency($val['PRICE'], $GLOBALS['SALE_INPUT_PARAMS']['ORDER']['CURRENCY'], $currency)),2,'.','');
+    $citem->setPriceUnit(number_format(CCurrencyRates::ConvertCurrency($val['PRICE'], $global_currency, $currency),2,'.',''));
     $corder->addOrderItem($citem);
 }
 
@@ -173,7 +174,7 @@ $citem->setName('Shipping');
 $citem->setType('S');
 $citem->setQuantity(1);
 //$citem->setPriceUnit(number_format($arOrder['PRICE_DELIVERY'], 2, '.', ''));
-$citem->setPriceUnit(number_format(CCurrencyRates::ConvertCurrency($val['PRICE_DELIVERY'], $GLOBALS['SALE_INPUT_PARAMS']['ORDER']['CURRENCY'], $currency)),2,'.'.'');
+$citem->setPriceUnit(number_format(CCurrencyRates::ConvertCurrency($price_delivery, $global_currency, $currency),2,'.',''));
 
 $corder->addOrderItem($citem);
 
@@ -186,7 +187,7 @@ $response_data = $client->submitOrder($corder);
 ?>
 
 <?//=GetMessage('COINFIDE_DESCRIPTION_PS')?><!-- <b>www.coinfide.com</b>.<br /><br />-->
-<?=GetMessage('COINFIDE_DESCRIPTION_SUM')?>: <b><?=CurrencyFormat($amount, $GLOBALS['SALE_INPUT_PARAMS']['ORDER']['CURRENCY'])?></b><br /><br />
+<?=GetMessage('COINFIDE_DESCRIPTION_SUM')?>: <b><?=CurrencyFormat($amount, $global_currency)?></b><br /><br />
 <!--<form method="POST" action="--><?//=$response_data->getRedirectUrl()?><!--" accept-charset="utf-8">-->
 <!--    <input type="submit" value="--><?//=GetMessage("COINFIDE_PAY")?><!--"/>-->
 <!--</form>-->
