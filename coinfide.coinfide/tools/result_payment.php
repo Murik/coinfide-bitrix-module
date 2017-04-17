@@ -82,7 +82,7 @@ try {
         'PS_STATUS_MESSAGE' => $sStatusMessage,
         'PS_SUM' => $amount,
         'PS_CURRENCY' => $currency,
-        'PS_RESPONSE_DATE' =>  date( "d.m.Y H:i:s" ),
+        'PS_RESPONSE_DATE' =>  date(CDatabase::DateFormatToPHP(CLang::GetDateFormat('FULL', LANG))),
     );
 
 //    CSaleOrder::PayOrder($arOrder['ID'], 'Y');

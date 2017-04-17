@@ -1,6 +1,6 @@
 <?
-$MESS["COINFIDE_PAYMENT_MODULE_NAME"]  = "Coinfide äëÿ Áèòðèêñ";
-$MESS["COINFIDE_PAYMENT_MODULE_DESC"]  = "Ìîäóëü ïëàò¸æíîé ñèñòåìû Coinfide äëÿ CMS \"Áèòðèêñ\"";
+$MESS["COINFIDE_PAYMENT_MODULE_NAME"]  = "Coinfide Ð´Ð»Ñ Ð‘Ð¸Ñ‚Ñ€Ð¸ÐºÑ";
+$MESS["COINFIDE_PAYMENT_MODULE_DESC"]  = "ÐœÐ¾Ð´ÑƒÐ»ÑŒ Ð¿Ð»Ð°Ñ‚Ñ‘Ð¶Ð½Ð¾Ð¹ ÑÐ¸ÑÑ‚ÐµÐ¼Ñ‹ Coinfide Ð´Ð»Ñ CMS \"Ð‘Ð¸Ñ‚Ñ€Ð¸ÐºÑ\"";
 $MESS["COINFIDE_PAYMENT_PARTNER_NAME"] = "Coinfide Payment Gateway ";
 $MESS["COINFIDE_PAYMENT_PARTNER_URI"]  = "https://www.coinfide.com/";
 ?>

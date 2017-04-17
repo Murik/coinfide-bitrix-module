@@ -113,8 +113,8 @@ $corder = new \Coinfide\Entity\Order();
                 //buyer
                 $buyer = new \Coinfide\Entity\Account();
                 $buyer->setEmail($user_email);
-                $buyer->setName(utf8_encode($user_name));
-                $buyer->setSurname(utf8_encode($user_surname));
+                $buyer->setName($user_name);
+                $buyer->setSurname($user_surname);
                 $buyer->setLanguage(CSalePaySystemAction::GetParamValue("LANGUAGE"));
                 $buyer->setBirthDate('19750101000000');
                 $phone = new \Coinfide\Entity\Phone();
@@ -122,10 +122,10 @@ $corder = new \Coinfide\Entity\Order();
                 $buyer->setPhone($phone);
         $baddress = new \Coinfide\Entity\Address();
         //todo adress!!!
-        $baddress->setCity(utf8_encode($GLOBALS['SALE_INPUT_PARAMS']['PROPERTY']['LOCATION_CITY']));
-        $baddress->setFirstAddressLine(utf8_encode($GLOBALS['SALE_INPUT_PARAMS']['PROPERTY']['ADDRESS']));
+        $baddress->setCity($GLOBALS['SALE_INPUT_PARAMS']['PROPERTY']['LOCATION_CITY']);
+        $baddress->setFirstAddressLine($GLOBALS['SALE_INPUT_PARAMS']['PROPERTY']['ADDRESS']);
 //        $baddress->setPostalCode($userData['PERSONAL_ZIP']);
-        $baddress->setPostalCode(utf8_encode($GLOBALS['SALE_INPUT_PARAMS']['PROPERTY']['ZIP']));
+        $baddress->setPostalCode($GLOBALS['SALE_INPUT_PARAMS']['PROPERTY']['ZIP']);
 
         $baddress->setCountryCode("RU");
         $buyer->setAddress($baddress);
@@ -163,7 +163,7 @@ foreach ($arBasketItems as $val)
 //    $forSend['ORDER_VAT'][]   = $vatRate;
 //    $forSend['ORDER_PRICE_TYPE'][] = $useVat;
     $citem = new \Coinfide\Entity\OrderItem();
-    $citem->setName(utf8_encode($val['NAME']) ?: 'unknown');
+    $citem->setName($val['NAME'] ?: 'unknown');
     $citem->setType('I');
     $citem->setQuantity($val['QUANTITY']);
 

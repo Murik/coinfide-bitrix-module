@@ -1,5 +1,5 @@
 <?
-$MESS["COINFIDE_PAYMENT_NE_UDALOSQ_OBRABOTAT"] = "Íå óäàëîñü îáðàáîòàòü âàø ïëàò¸æ. Ïîæàëóéñòà ïîïðîáóéòå ïîâòîðèòü ïëàò¸æ èëè îáðàòèòåñü ê íåøåìó êîíñóëüòàíòó...";
-$MESS["COINFIDE_PAYMENT_INFORMACIA_O_STATUSE"] = "Èíôîðìàöèÿ î ñòàòóñå îïëàòû ";
-$MESS["COINFIDE_PAYMENT_UVAJAEMYY_POKUPATELQ"] = "Óâàæàåìûé ïîêóïàòåëü! ";
+$MESS["COINFIDE_PAYMENT_NE_UDALOSQ_OBRABOTAT"] = "ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚Ð°Ñ‚ÑŒ Ð²Ð°Ñˆ Ð¿Ð»Ð°Ñ‚Ñ‘Ð¶. ÐŸÐ¾Ð¶Ð°Ð»ÑƒÐ¹ÑÑ‚Ð° Ð¿Ð¾Ð¿Ñ€Ð¾Ð±ÑƒÐ¹Ñ‚Ðµ Ð¿Ð¾Ð²Ñ‚Ð¾Ñ€Ð¸Ñ‚ÑŒ Ð¿Ð»Ð°Ñ‚Ñ‘Ð¶ Ð¸Ð»Ð¸ Ð¾Ð±Ñ€Ð°Ñ‚Ð¸Ñ‚ÐµÑÑŒ Ðº Ð½ÐµÑˆÐµÐ¼Ñƒ ÐºÐ¾Ð½ÑÑƒÐ»ÑŒÑ‚Ð°Ð½Ñ‚Ñƒ...";
+$MESS["COINFIDE_PAYMENT_INFORMACIA_O_STATUSE"] = "Ð˜Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ñ Ð¾ ÑÑ‚Ð°Ñ‚ÑƒÑÐµ Ð¾Ð¿Ð»Ð°Ñ‚Ñ‹ ";
+$MESS["COINFIDE_PAYMENT_UVAJAEMYY_POKUPATELQ"] = "Ð£Ð²Ð°Ð¶Ð°ÐµÐ¼Ñ‹Ð¹ Ð¿Ð¾ÐºÑƒÐ¿Ð°Ñ‚ÐµÐ»ÑŒ! ";
 ?>
