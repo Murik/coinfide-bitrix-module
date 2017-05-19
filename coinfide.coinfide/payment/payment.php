@@ -18,6 +18,8 @@ if(!CModule::IncludeModule("sale")) return;
 #------------------------------------------------
 # Recive all items data
 #------------------------------------------------
+$part_pay = (strlen(CSalePaySystemAction::GetParamValue('PART_PAY')) > 0) && CSalePaySystemAction::GetParamValue('PART_PAY')=='Y';
+
 $amount = (strlen(CSalePaySystemAction::GetParamValue('AMOUNT')) > 0)
     ? CSalePaySystemAction::GetParamValue('AMOUNT')
     : $GLOBALS['SALE_INPUT_PARAMS']['ORDER']['SHOULD_PAY'];
@@ -112,24 +114,33 @@ $corder = new \Coinfide\Entity\Order();
 
                 //buyer
                 $buyer = new \Coinfide\Entity\Account();
+                if(empty($user_email))     throw new \Exception('Empty Email');
                 $buyer->setEmail($user_email);
+                if(empty($user_name))     throw new \Exception('Empty Name');
                 $buyer->setName($user_name);
+                if(empty($user_surname))     throw new \Exception('Empty SurName');
                 $buyer->setSurname($user_surname);
                 $buyer->setLanguage(CSalePaySystemAction::GetParamValue("LANGUAGE"));
                 $buyer->setBirthDate('19750101000000');
                 $phone = new \Coinfide\Entity\Phone();
+                if(empty($user_phone))     throw new \Exception('Empty Phone');
                 $phone ->setFullNumber((string)preg_replace('/[^\d]+/','',$user_phone));
+                if (substr($phone,0,1) == 8) $phone[0] = 7;
                 $buyer->setPhone($phone);
         $baddress = new \Coinfide\Entity\Address();
         //todo adress!!!
+        if(empty($GLOBALS['SALE_INPUT_PARAMS']['PROPERTY']['LOCATION_CITY']))     throw new \Exception('Empty City');
         $baddress->setCity($GLOBALS['SALE_INPUT_PARAMS']['PROPERTY']['LOCATION_CITY']);
+if(empty($GLOBALS['SALE_INPUT_PARAMS']['PROPERTY']['ADDRESS']))     throw new \Exception('Empty Address');
         $baddress->setFirstAddressLine($GLOBALS['SALE_INPUT_PARAMS']['PROPERTY']['ADDRESS']);
 //        $baddress->setPostalCode($userData['PERSONAL_ZIP']);
+if(empty($GLOBALS['SALE_INPUT_PARAMS']['PROPERTY']['ZIP']))     throw new \Exception('Empty PostCode');
         $baddress->setPostalCode($GLOBALS['SALE_INPUT_PARAMS']['PROPERTY']['ZIP']);
 
         $baddress->setCountryCode("RU");
         $buyer->setAddress($baddress);
         $corder->setBuyer($buyer);
+if(empty($currency))     throw new \Exception('Empty Currency');
         $corder->setCurrencyCode($currency);
 
         $corder->setExternalOrderId($orderID);
@@ -154,25 +165,25 @@ $corder = new \Coinfide\Entity\Order();
 //    $useVat = 'NET';
 //}
 
-foreach ($arBasketItems as $val)
-{
+if (!$part_pay) {
+    foreach ($arBasketItems as $val) {
 //    if ($val['VAT_RATE'] != '0.00') {
 //        $useVat = 'GROSS';
 //        $vatRate = '19';
 //    }
 //    $forSend['ORDER_VAT'][]   = $vatRate;
 //    $forSend['ORDER_PRICE_TYPE'][] = $useVat;
-    $citem = new \Coinfide\Entity\OrderItem();
-    $citem->setName($val['NAME'] ?: 'unknown');
-    $citem->setType('I');
-    $citem->setQuantity($val['QUANTITY']);
+        $citem = new \Coinfide\Entity\OrderItem();
+        $citem->setName($val['NAME'] ?: 'unknown');
+        $citem->setType('I');
+        $citem->setQuantity($val['QUANTITY']);
 
 //    $citem->setPriceUnit(number_format($val['PRICE'], 2, '.', ''));
 //    CCurrencyRates::ConvertCurrency
-    $citem->setPriceUnit(number_format(CCurrencyRates::ConvertCurrency($val['PRICE'], $global_currency, $currency),2,'.',''));
-    $corder->addOrderItem($citem);
+        $citem->setPriceUnit(number_format(CCurrencyRates::ConvertCurrency($val['PRICE'], $global_currency, $currency), 2, '.', ''));
+        $corder->addOrderItem($citem);
+    }
 }
-
 $citem = new \Coinfide\Entity\OrderItem();
 $citem->setName('Shipping');
 $citem->setType('S');
@@ -185,7 +196,9 @@ $corder->addOrderItem($citem);
 
 
 $corder->validate();
-//print_r($corder->toArray());
+$output = print_r($corder->toArray(),true);
+
+AddMessage2Log("Заказ ". $output, "coinfide.coinfide");
 $response_data = $client->submitOrder($corder);
 
 ?>

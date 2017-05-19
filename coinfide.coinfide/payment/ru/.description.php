@@ -22,6 +22,10 @@ $MESS["COINFIDE_PRICE_CURRENCY"] = "Валюта платежа";
 $MESS["COINFIDE_DESC_PRICE_CURRENCY"] = "<b style='color=#aeaeae;'>Внимание!</b> Это значение должно соответствовать валюте вашего мерчанта: (TS1 для тестового мерчанта)";
 $MESS["SHOULD_PAY"] = "Сумма заказа";
 $MESS["SHOULD_PAY_DESCR"] = "Сумма к оплате";
+
+$MESS["PART_PAY"] = "Частичная оплата заказа";
+$MESS["PART_PAY_DESCR"] = "Оптлата только за доставку (Y - вкл, пусто или N - выкл)";
+
 $MESS["COINFIDE_DEBUG_MODE"] = "Включить режим отладки";
 $MESS["COINFIDE_DESC_DEBUG_MODE"] = "(1 - отладка включена, 0 - отладка выключена)";
 $MESS['COINFIDE_YES'] = "Да";
