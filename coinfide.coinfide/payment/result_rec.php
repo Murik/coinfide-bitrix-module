@@ -30,6 +30,8 @@ try {
 
 //    unset($_POST['checksum']);
 
+    $part_pay = (strlen(CSalePaySystemAction::GetParamValue('PART_PAY')) > 0) && CSalePaySystemAction::GetParamValue('PART_PAY')=='Y';
+
     if (md5(http_build_query($_POST) . CSalePaySystemAction::GetParamValue('API_KEY')) != $_SERVER['HTTP_X_BODY_CHECKSUM']) {
 //            echo 'Callback valid! You may process the order. Order data: ';
         throw new Exception('Callback invalid! You may not process the order. Order data: ' . serialize($this->request->post));
@@ -80,6 +82,9 @@ try {
     if (in_array($status, $paymentStatusSuccess)) {
         $arFields['PS_STATUS'] = 'Y';
         $result = CSaleOrder::PayOrder($order['ID'], 'Y', false, null, 0, $arFields);
+        if ($part_pay) {
+            CSaleOrder::StatusOrder($orderID, "ZK");
+        }
         echo 'OK';
     } elseif (in_array($status, $paymentStatusFiled)) {
         $arFields['PS_STATUS'] = 'N';
