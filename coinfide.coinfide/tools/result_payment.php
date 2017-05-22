@@ -38,6 +38,8 @@ try {
 
     unset($_POST['checksum']);
 
+    $part_pay = (strlen(CSalePaySystemAction::GetParamValue('PART_PAY')) > 0) && CSalePaySystemAction::GetParamValue('PART_PAY')=='Y';
+
     if (md5(http_build_query($_POST) . CSalePaySystemAction::GetParamValue('API_KEY')) != $checksum) {
 //            echo 'Callback valid! You may process the order. Order data: ';
 //        throw new Exception('SUCCESS URL Params invalid! You may not process the order. Order data: ' . serialize($_POST));
@@ -91,6 +93,10 @@ try {
         $arFields['PS_STATUS'] = 'Y';
         $result = CSaleOrder::PayOrder($order['ID'], 'Y', false, null, 0, $arFields);
         $message = ' '.GetMessage("COINFIDE_PAYMENT_VAS_PLATEJ_USPESNO_V");
+
+        if ($part_pay && strlen(CSalePaySystemAction::GetParamValue('PART_PAY'))>0) {
+            CSaleOrder::StatusOrder($orderID, CSalePaySystemAction::GetParamValue('PART_PAY'));
+        }
     } elseif (in_array($status, $paymentStatusFiled)) {
         $arFields['PS_STATUS'] = 'N';
         $result = CSaleOrder::PayOrder($order['ID'], 'N', false, null, 0, $arFields);

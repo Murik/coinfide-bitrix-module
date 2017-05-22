@@ -103,5 +103,12 @@ $arPSCorrespondence = array(
         'TYPE'  => 'VALUE'
     ),
 
+    'PART_PAY_STATUS' => array(
+        'NAME'  => GetMessage('PART_PAY_STATUS'),
+        'DESCR' => GetMessage('PART_PAY_STATUS_DESCR'),
+        'VALUE' => 'PART_PAY_STATUS',
+        'TYPE'  => 'VALUE'
+    ),
+
 );
 ?>

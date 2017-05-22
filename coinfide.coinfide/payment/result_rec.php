@@ -37,11 +37,11 @@ try {
         throw new Exception('Callback invalid! You may not process the order. Order data: ' . serialize($this->request->post));
     }
 
-        if (isset($_POST['transactionUid'])) {
-            $transaction_id = $_POST['transactionUid'];
-        } else {
-            $transaction_id = '';
-        }
+    if (isset($_POST['transactionUid'])) {
+        $transaction_id = $_POST['transactionUid'];
+    } else {
+        $transaction_id = '';
+    }
 
     $amount = $_POST['amountTotal'];
     $currency = $_POST['currencyCode'];
@@ -74,7 +74,7 @@ try {
         'PS_STATUS_MESSAGE' => $sStatusMessage,
         'PS_SUM' => $amount,
         'PS_CURRENCY' => $currency,
-        'PS_RESPONSE_DATE' =>  date( "d.m.Y H:i:s" ),
+        'PS_RESPONSE_DATE' =>  date(CDatabase::DateFormatToPHP(CLang::GetDateFormat('FULL', LANG))),
     );
 
 //    CSaleOrder::PayOrder($arOrder['ID'], 'Y');
@@ -82,10 +82,10 @@ try {
     if (in_array($status, $paymentStatusSuccess)) {
         $arFields['PS_STATUS'] = 'Y';
         $result = CSaleOrder::PayOrder($order['ID'], 'Y', false, null, 0, $arFields);
-        if ($part_pay) {
-            CSaleOrder::StatusOrder($orderID, "ZK");
-        }
         echo 'OK';
+        if ($part_pay && strlen(CSalePaySystemAction::GetParamValue('PART_PAY'))>0) {
+            CSaleOrder::StatusOrder($orderID, CSalePaySystemAction::GetParamValue('PART_PAY'));
+        }
     } elseif (in_array($status, $paymentStatusFiled)) {
         $arFields['PS_STATUS'] = 'N';
         $result = CSaleOrder::PayOrder($order['ID'], 'N', false, null, 0, $arFields);
